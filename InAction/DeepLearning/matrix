@@ -1,0 +1,57 @@
+## 
+Matrix multplication 
+
+In mathematics , matrix multiplication or the matrix product is a binary operation that produces a matrix from two matrices.
+
+struct Matrix:vector<vector<int>> 
+
+{ 
+	Matrix(int x=0, int y=0, int z=0)
+	{
+		assign(v, vector<int>(y,z));
+	}
+
+	int h_size() const
+	{
+
+	return size();
+	}
+
+	int l_size() const
+	{
+		return empty()?:front().size();
+	}
+
+	Matrix pow(int k);
+
+};
+Matrix operator*(const Matrix &m, const Matrix &n)
+{
+	if(m.l_size()!=h_siz()) return Matrix();
+
+	Matrix ans(m.h_siz(), n.l_size());
+	
+	for(int i=0;i!=ans.h_size();++i)
+		for(int j=0; j!=ans.l_size();++i)
+			for(int k=0;k!=m.l_size();++k)
+				ans[i][j] += m[i][k]*n[k][j]
+	return ans;
+}
+
+Matrix Matrix::pow(int k)
+{
+
+	if (k == 0)
+	{
+		Matrix ans(h_size(), h_size());
+		for(int i=0; i!=ans.h_size(); ++i)
+			ans[i][i] = 1;
+		return ans;
+	}
+
+	if(k == 2) return (*this) * (*this);
+	if(k%2) return pow(k-1)*(*this);
+	return pow(k/2).pow(2)
+}
+
+

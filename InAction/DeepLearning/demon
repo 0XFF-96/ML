@@ -1,0 +1,33 @@
+##
+example :
+
+
+def claArea(radius):
+
+	area=3.14*radius*radius
+	
+	returen area 
+
+
+
+
+
+##
+
+#There is an example of Machine learinging
+
+def learn(model, data):
+
+	# train data , 
+
+	return model 
+
+def test(model, x)
+
+	# input x , and return y 
+
+	return y 
+
+trained_model=learn(init_model, data)
+
+
