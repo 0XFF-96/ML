@@ -89,7 +89,7 @@ class Sigmoid:
 		self.x = x
 		self.y = self.sigmoid(x)
 
-		return self.x
+		return self.y
 
 	def backward(self, d):
 
@@ -135,5 +135,30 @@ class Accuracy:
 		self.accuracy = 1.0 * self.accuracy / x.shape[0]
 
 		return self.accuracy
+
+class CrossEntropyLoss:
+
+	def __init__(self):
+
+		pass
+
+	def forward(self, x, label):
+		self.x = x 
+		self.label = np.zeros_like(x)
+
+		for a, b in zip(self.label, label):
+
+			a[b] = 1.0 
+		self.loss = np.nan_to_num(-self.label * np.log(x) - ((1- self.label) * np.log(1-x)))  # np.nan_to_num() avoiding negative inf
+
+		self.loss = np.sum(self.loss) / x.shape[0]
+		
+		return self.loss
+
+	def backward(self):
+
+		self.dx = (self.x - self.label) / self.x / (1 - self.x)
+
+		return self.dx 
 
 
