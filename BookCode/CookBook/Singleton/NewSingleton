@@ -1,0 +1,56 @@
+class Singleton(object):
+    def __new__(cls, *args, **kw):
+        if not hasattr(cls, '_instance'):
+            orig = super(Sigleton, cls)
+            cls._instance = orgi.__new__(cls, *args, **kw)
+    return cls._instance
+
+class Myclass(Singleton):
+
+    a = 1
+
+
+shares propertity
+
+class Borg(object):
+
+    _state = {}
+    def __new__(cls, *args, **kw):
+        ob = super(Borg, cls).__new__(cls, *args, **kw)
+        ob.__dict__ = cls._state
+
+        return ob
+
+class Myclass2(Borg):
+
+    a = 1
+
+
+def singelton(cls, *args, **kw):
+
+    instances = {}
+    def getinstance():
+        if cls not in instances:
+            instances[cls] = cls(*args, **kw)
+        return instances[cls]
+    return getinstance
+
+@singelton
+class Myclss:
+    ...
+
+
+#mysingleton.py
+class.My_Singleton(object):
+    def foo(self):
+        pass
+
+my_singleton = My_Sington()
+
+#to use 
+from mysingleton imort my_singleton
+
+my_singleton.foo()
+
+
+
