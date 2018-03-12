@@ -1,0 +1,120 @@
+class Foo(object):
+    __instance = None
+    def __init__(self):
+        pass
+
+    @classmethod
+    def getinstance(cls):
+        if(cls.__instance == None):
+            cls.__intance = Foo()
+        return cls.__instance
+
+if __name__ = '__main__':
+
+    foo1 = Foo.getinstance()
+    foo2 = Foo.getinstance()
+
+    print id(foo1)
+    print id(foo2)
+
+    print id(Foo())
+
+what is the difference between init and New ?
+
+class Foo(object):
+    __intance = None
+    def __init__(self):
+        print 'init'
+
+    def __new__(cls, *args, **kwargs):
+        print 'new'
+if __name__ == '__main__':
+    foo = Foo()
+-----
+output :  new 
+
+this is error 
+
+class Foo(object):
+    __intance = None 
+    def __init__(self):
+        print 'int'
+
+    def __new__(cls, *args, **kwargs):
+        print 'new'
+
+        if cls.__instance == None:
+            cls.__instance = cls.__new__(cls, *args, **kwargs)
+
+        return cls.__instance
+if __name__ == '__mian__':
+
+    foo = Foo()
+-----
+this is also a error
+
+class Foo(object):
+    __instacce = None 
+    def __init__(self):
+        if self.__class__.__instance == None:
+            self.__clss__.__instance = Foo()
+        print 'init'
+if __name__== '__mian__':
+    foo = Foo()
+
+
+class Foo(object):
+    __instance = None
+    def __new__(cls, *args, **kwargs):
+        print 'hhhh'
+        if not cls.__instance:
+            cls.__instance = super(Foo, cls).__new__(cls,*args, **kwargs)
+        return cls.__instance
+
+    def hi(self):
+        print 'hi, world'
+        print 'hi, letian'
+if __name__ == '__mian__':
+    foo1 = Foo()
+    foo2 = Foo()
+
+    print id(foo1)
+    print id(foo2)
+
+    print isinstance(foo1, object)
+    pritn isinstance(foo1, object)
+    foo1.hi()
+
+what about super.__doc__
+
+super(type) -> unbound super object
+
+print object.__new__.__doc__
+T.__new__(S,..) a new object with type S, a subtype of T
+
+class Fo(objcet):
+    def __new__(cls, *args, **kwargs):
+        print 'hi, i am Fo'
+        print super(Fo, cls).__new__(cls, *args, **kwargs)
+
+class Foo(Fo):
+
+    __instance = None
+    def __new__(cls, *args, **kwargs):
+        if not cls.__instance:
+            pritn Foo is cls
+            print 'issubclass(cls,Fo)
+            pritn issubclsss(cls, object)
+            cls.__instance = super(Foo, cls).__new__(cls,*args, **kwargs)
+
+        return cls.))instance
+
+     def hi(self):
+        print 'hi, world'
+
+if __name__ == '__mian__':
+
+    foo1 = Foo()
+    foo1.hi()
+
+
