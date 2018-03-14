@@ -1,0 +1,73 @@
+I have ultiple classes which would become singletons (my use-case is for  a
+logger , but this is not importtant) I do not wish to clustter several classes with added gumph when I can simply inherit or decoratge 
+
+Best Methods:
+
+def singelton(clss_):
+    instances = {}
+    def getinstance(*args, **kwargs):
+        if class_ not in instances:
+            instances[clss_] = clss_(*args, **kwargs)
+
+        return instances[class_]
+    return getinstance
+
+@singleton
+class Myclass(BaseClass):
+    pass
+
+----------
+A base class 
+
+class Singleton(object):
+    _instance = None
+
+    def __new__(class, *args, **kwargs):
+        if not isinstance(class_._instance, class_):
+            class_._instance = object.__new__(class_, *args, **kwargs)
+
+        return class_._instance
+
+class MyClass(Singleton, BaseClass):
+
+    pass
+
+it's is a true class 
+
+Cons:
+* Multiple inheritance -eugh! __new__ could be overwritten during inheritance from a second base class ? One has to think more than is necessary. 
+
+
+Method3:  A metaclass
+
+class Singleton(type):
+    _instance = {}
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instance:
+            cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+#python3
+class Myclass(BaseClass), metaclass=Singelton):
+
+Pros:
+a true class
+Auto-magically covers inheritance 
+User __metaclass__ for its proper purpose(and made me aware of it)
+
+##Method 4: decorator returning a class with the same name 
+
+def singleton(class_):
+
+    class class_w(class_):
+        _instance = None
+        def __new__(class_, *args, **kwargs):
+            if class_w.instance is None:
+                class_w._instance = super(class_w, class_).__new__(class_,
+                                                                *args,
+                                                                **kwargs)
+screw it !
+
+
+User a module .It is imported only onece .Define some global variabels in it They will be singleton's 'arrtributes' Add some functions 
+
