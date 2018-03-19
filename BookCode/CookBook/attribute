@@ -1,0 +1,42 @@
+class Person:
+    
+    def __init__(self, first_name):
+        self.first_name = first_name
+
+    # Getter function
+    @property
+    def first_name(self):
+        return self._first_name
+
+    # Setter function
+    @first_name.setter
+    def first_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+
+        self_first_name = value
+
+    #Deleter function (optional)
+    @first_name.deleter
+    def first_name(self):
+        raise AttributeError("Can't delete attribute)
+
+class Proxy:
+
+    def __init__(self, obj):
+        self._obj = obj
+
+    def __getattr_(self, name):
+
+        return getattr(self.obj)
+
+    def __saetattr__(self, name, value):
+        
+        if name.startswith('_'):
+            super().__setattr__(name, value) # call original __setattr__
+
+        else:
+            setattr(self._obj, name, value)
+
+
+
