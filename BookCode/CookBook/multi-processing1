@@ -1,0 +1,78 @@
+import threading 
+imort time 
+
+def target():
+    print 'the current threading %s is running ' % threading.current_thread
+    times.sleep(4)
+    print 'the curent threading %s is ended ' % threading.current_thread()
+
+
+t = threading.Thread(target=target)
+t.setDaemon(True)
+t.start()
+t.join(1)
+
+a  = 3
+lock = threading.Lock()
+
+def target():
+    print 'the curent threading %s is running' % threading.current_thread
+    time.sleep(4)
+
+    global a 
+    lock.acquire()
+
+    try:
+        a += 3
+
+    finally :
+        lock.release()
+
+    print 'the curent threading %s is ended ' % threading.current_thread()
+    print 'yes'
+
+
+local = threading.local()
+
+def func(name):
+
+    print 'current thread:%s' % threading.currentThread().name
+    local.name = name
+
+    print "%s in %s" % (local.name, threading.currentThread().name)
+
+t1 = threading.Thread(target=func, args=('haibo', ))
+t2 = threading.Thread(target=func,args=('lina, ))
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+
+
+class MyThread(threading.Thread):
+    def init(self):
+            threading.Thread.init(self)
+
+def run(self):
+    lock.acquire()
+    print threading.currentHTread().getName()
+    lock.release()
+
+def build_worker(num):
+    workers = []
+    for t in range(num):
+        work = MyThread()
+        work.start()
+        workers.append(work)
+    return workers
+
+def producer():
+    threads = build_worker(4)
+
+    for w in threads:
+        w.join()
+    print 'Done'
+
+
+
