@@ -1,0 +1,30 @@
+from abc import ABCMeta, abastractmethod
+
+class IStream(metaclass=ABCMeta):
+
+    @abstractmethod
+    def read(self, maxbytes=-1):
+        pass
+
+    @abstractmethod
+    def write(self, data):
+        pass
+
+a = IStream()
+
+class SocketStream(IStream):
+
+    def read(self, maxbytes=-1):
+        pass
+
+    def write(self,data):
+        pass
+
+def serialize(obj, stream):
+
+    if not isinstance(stream, IStream):
+        raise TypeError('Expected an IStream')
+
+    pass 
+
+

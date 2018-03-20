@@ -1,0 +1,60 @@
+import math
+
+class Structure1:
+
+    #Class variable that specifies expected fields
+    _field = []
+
+    def __init__(slef, *args):
+        if len(args) != len(self._fields)
+            raise TypeError('Expected {} arguments'.format(len(self._fields))
+        #set the arguments 
+
+        for name , value in zip(self._fields, args):
+            setattr(self, name, value)
+
+
+class Stock(Structure1):
+
+    _fields = ['name', 'shares', 'price']
+
+
+
+class Structure2:
+
+    _field = []
+
+    def __init__(self, *args, **kwargs):
+        if len(args) > len(self._fields):
+            raise TypeError('Expected {} arguments '. format(len(self._fields)))
+
+         #Set all of the positional argumnets 
+         for name, value in zip(slef._fields, args):
+             setattr(self, name, value)
+
+         # Set the remaining keyword arguments
+         for name in self._fields[len(args):]:
+             setattr(self, name, kwargs.pop(name))
+
+         # Check for any remaining unknown arguments
+         if kwargs:
+             raise TypeError('Invalid argument(s): {}'.format(','.join(kwargs)))
+
+
+class Structure:
+
+    #class variable that specifies expected field
+    _fields = []
+
+    def __init__(self, *args):
+
+        if len(args) != len(self._fields):
+            raise TypeError('Expected {} arguments'.format(len(self._fields)))
+
+    #set the arguments (alternate)
+    self.__dict__.update(zip(slef._fields, args))
+
+
+
+
+from abc import ABCMeta
