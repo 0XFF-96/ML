@@ -1,0 +1,197 @@
+
+'''
+
+A thread is an execution context, which is all the information a CPU needs 
+to execute a stream of instructions.
+
+
+'''
+
+import threading
+import time
+
+def sayhi(num):
+
+    print("running on number :%s " %num)
+
+    time.sleep(3)
+
+if __name__=='__main__':
+
+    t1 = threading.Thread(target=sayhi, args=(1,))
+    t2 = threading.Thread(target=sayhi, args=(2, ))
+
+    t1.start()
+    t2.start()
+
+    print(t1.getName())
+    print(t2.getName())
+
+class MyThread(threading.Thread):
+
+    def __init__(self, num):
+        threading.Thread.__init__(self)
+        self.num = num
+
+    def run(self):
+
+        print("running on number:%s" %self.num)
+
+        time.sleep(3)
+
+if __name__=='__main__':
+
+    t1 = MyThread(1)
+    t2 = MyThread(2)
+    t1.start()
+    t2.start()
+
+==>>>>>Join Daemon
+
+import threading
+from time import ctime, sleep
+import time
+
+def music(func):
+
+    for i in range(2):
+        print ("Begin listening to %s. %s" %(fun, ctime))
+        sleep(4)
+        print("end listening %s"%ctime())
+
+def move(func):
+
+    for i in range(2):
+        print ("Begin watching at the %s ! %s" %(func, ctime()))
+        sleep(5)
+        print('end watching %s' %ctime())
+
+threads = []
+
+t1 = threading.THread(target=music, args=('seven',))
+threads.append(t1)
+
+t2 = threading.Thread(target=move, args=('aGUN',))
+threads.append(t2)
+
+if__name__=='__main__':
+
+    for t in threads:
+        #t.setDaemon(True)
+        t.start()
+
+        #t.join()
+   #t1.join()
+   t2.join()
+   print("all over %s" %ctime())
+
+
+import time 
+import threading
+
+def addNum():
+    global num
+    # num -= 1
+
+    temp=num
+    pritn('--get num:', num)
+
+    num = temp-1
+
+
+num = 100
+
+thread_list = []
+
+for i in range(100):
+    t = threading.Thread(target=addNum)
+    t.start()
+    thread_list.append(t)
+
+for t in thread_list:
+    t.join
+
+print('final num:', num)
+
+import threading, time
+from random import randint
+
+class Product(threading.Thread):
+    def run(self):
+        global L 
+        while True:
+            val = randint(0, 100)
+            print('producter', self.name, ":Append" + str(val), L)
+
+            if lock_con.acquire():
+                L.append(val)
+                lock_con.notify()
+                lock_con.release()
+
+            time.sleep(3)
+
+class COnsumer(threading.Thread):
+    def run(self):
+        global L
+        while True:
+            lock_con.acquire()
+            if len(L) == 0:
+                lock_con.wait()
+
+            print('product', self.name, ":Delete" + str(L[0]),L)
+            del L[0]
+            lock_con.release()
+            time.sleep(0.25)
+
+if __name__ == "__main__":
+
+    L = []
+    lock_con = threding.Condittion()
+
+    threads = []
+
+    for i in range(5):
+
+        threads.append(Producer())
+
+    threads.append(Consumer())
+
+    for t in threads:
+        t.start()
+
+    for t in threads:
+        t.join()
+>>>>>>>+++++++++++++++++++++++++++++
+
+
+import threading, queue
+from time import sleep
+
+from random import randint
+class Production(threading.Thread):
+    def run(self):
+        while True:
+            r = randint(0, 100)
+            q.put(r)
+            print("produce bao zi")
+
+            sleep(1)
+
+class Process(threading.Thread):
+
+    def run(self):
+        while True:
+            re = q.get()
+            print ("eating bao zi")
+
+if __name__== "__main__":
+
+    q = queue.Queue(10)
+
+    threads = [Production(), Production(), Production(), Process()]
+
+    for t in threads:
+        t.start()
+
+
+         
