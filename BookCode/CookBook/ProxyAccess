@@ -1,0 +1,65 @@
+class A:
+
+    def spam(self, x):
+        pass
+
+    def foo(self):
+        pass
+
+
+
+class B1:
+
+    def __init__(self):
+
+        self._a = A()
+
+
+    def spam(self, A):
+
+        # Delegate to the internal self._a instance 
+
+        return self._a.span(x)
+
+    def foo(self):
+        
+        # Delegate to the internal self._a instance 
+        return self._a.foo()
+
+
+    def bar(self):
+        pass
+
+
+class B2:
+
+    "__Getattr__"
+
+    def __init__(self):
+        
+        self._a = A()
+
+    def bar(self):
+
+        pass
+
+    def __getattr__(self, name):
+
+        '''
+        the __getattr__() method is actually a fallback method 
+        that only gets called when an attribute is not found
+        '''
+
+        return getattr(self._a, name)
+
+
+# A proxy class that wraps around another object, but 
+# exposes its public attributes 
+
+class Proxy:
+
+    def __init__(self, obj):
+    
+        self._obj = obj
+
+    # Delegate attribute lookup to internal 
