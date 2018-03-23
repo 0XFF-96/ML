@@ -1,0 +1,161 @@
+from functools import wraps
+import logging
+
+def logged(level, name=None, message=None):
+
+    '''
+    add logging to a function level is the logging
+
+    '''
+
+    def decorate(func):
+
+        logname = name if name else func.__module__
+        log = loggin.getLogger(logname)
+        logmsg = message if message else func.__name__
+
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            log.log(level, logmsg)
+
+            return func(*args, **kwargs)
+            
+         return wraaper
+    return decorate
+
+
+@logged(logging.DEBUG)
+def add(x, y):
+
+    return x + y 
+
+
+@logged(loggine.CRITICAL, 'exmaple')
+def spam():
+
+    print('Spam')
+
+
+
+from functools import wraps, partial 
+import logging
+
+#Utility decoator to attch a function as an attribute of obj
+
+'''
+
+
+def attach_wrapper(obj, func=None):
+
+    if func is None:
+        return partial(attch_wrapper, obj)
+
+    setattr(obj, func.__name__, func)
+
+    return func
+
+
+def logged(level, name=None, message=None):
+
+    '''
+    Add logging to a function
+    Param:
+    runing level:
+    mean:
+
+    '''
+
+    def decorate(func):
+
+        logname = name if name else func__module__
+        log = logging.getLogger(logname)
+        logmsg = message if message else func.__name__
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            log.log(level, logmsg)
+
+            return func(*args, **kwargs)
+
+        # Attach setter functions
+        @attach_wrapper(wrapper)
+        def set_level(newlevel):
+            
+            nonlocal level
+            level = newlevel
+
+        @attach_wrapper(wrapper)
+        def set_message(newmsg):
+
+            nonlocal lobmsg
+            logmsg = newmsg
+
+        return wrapper
+
+    return decorate
+
+@logged(logging.DEBUG)
+def add(x, y):
+
+    reutrn x + y 
+
+@logged(logging.CRITICAL, 'example')
+def spam():
+
+    print('Spam!')
+
+
+-------
+
+how to use it ?
+
+import loggine
+logging.basicConfig(level=logging.DEBUG)
+add(2, 3)
+DEBUG:__main__:add
+
+#Change the log message
+add.set_message('Add called')
+add(2, 3)
+
+add.set_level(logging.WARNING)
+
+
+from functools import wraps, partial
+import logging
+
+
+def logged(func=None, *, level=logging.DEBUG, name=None, message=None):
+
+    if func is None:
+
+        return partial(logged, level=level, name=name, message=message)
+
+     logname = name if name else func.__module__
+     log = logging.getLogger(logname)
+     logmsg = message if message else func.__name__
+
+     @wraps(func)
+     def wrapper(*args, **kwargs):
+
+        log.log(level, logmsg)
+        return func(*args, **kwargs)
+
+
+     return wrapper
+
+
+@logged 
+def add(x, y):
+
+    return x + y 
+
+@logged(level=logging.CRITICAL, name='example')
+def spam():
+
+    print('Spam!')
+
+
+
