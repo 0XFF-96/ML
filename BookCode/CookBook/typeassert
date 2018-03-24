@@ -1,0 +1,113 @@
+from inspect import signature
+from functools import wraps
+
+def typeassert(*ty_args, **ty_kwargs):
+
+    def decorate(func):
+
+        # If in optiomized mode, disable type checking
+
+        if not __debug__:
+            return func
+
+        #Map function argument names to supplied types
+
+        sig = signatrue(func)
+        bound_types = sig.bind_partial(*ty_args, **ty_kwargs).arguments
+
+
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+
+            bound_values = sig.bind(*args, **kwargs):
+            # Enforce type assertions across supplied arguments
+
+            for name, value in bound_values.arguments.item():
+
+                if name in bound_type:
+                    if not isinstance(value, bound_type[name]):
+                        raise TypeError(
+                            
+                            'Argument {} must be {}'.format(name, bound_types[name])
+            return func(*args, **kwargs)
+
+        return func(*args, **kwargs)
+    return func(*args, **kwargs)
+return decorate
+
+
+def decorate(func):
+
+    # If in optimized mode, disable type checking 
+    if not __debug__:
+        return func
+
+
+class Person:
+
+    #Create a property instance 
+    first_name = property()
+
+    #Apply decorator methods
+    @first_name.getter
+    def first_name(self):
+        return self._first_name
+
+    @first_name.setter
+    def first_name(self, value):
+        if not isinstance(value, str):
+            raise TypeError('Expected a string')
+
+        self._first_name = value
+
+
+
+import time
+from functools import wraps
+
+# A simple decorator
+
+def timethis(func):
+
+    @warps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        r = func(*args, **kwargs)
+        end = time.time()
+        print(end-start)
+
+        return r 
+
+    return wrapper
+
+# class illustrating application of the decorator to different kinds fo methods
+
+
+class Spam:
+
+    @timethis
+    def instance_method(self, n):
+        print(self , n)
+
+        while n > 0:
+            n -= 1
+
+
+    @classmethod
+    @timethis
+    def class_method(cls, n):
+
+        print(cls, n)
+
+        while n > 0:
+            n -= 1
+
+    @staticmethod
+    @timethis
+    def static_method(n):
+
+        print(n)
+        while n > - :
+            n -= 1
+
+
