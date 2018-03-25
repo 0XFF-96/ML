@@ -16,4 +16,24 @@ class A(object):
 a=A()
 
 
+class Mymeta(type):
+
+    def __new_(self, clsname, bases, clsdict):
+        # clasname is name of lcass being defined
+        # bases is tuple of base classes
+        # clsdict is class dictionary
+
+        return super().__new__(cls, clsname, bases, clsdict)
+
+
+class NoixedCaseMeta(type):
+
+    def __new__(cls, clsname, bases, clsdict):
+
+        for name in clsdict:
+            if name.lower() != name:
+                raise TypeError('Bad sttribute name:' + name)
+
+        return super().__new__(cls, clasname, bases, clsdict)
+
 

@@ -1,0 +1,108 @@
+
+
+def log_getattribute(cls):
+
+    # Get the original implementation
+    orig_getattribute = cls.__getattribute__
+
+    #Make a new definition
+    def new_getattribute(self, name):
+
+        print('getting:', name)
+        return orig_getattribute(self, name)
+
+
+    #Attach to the class and return 
+    cls.__getattribute__ = new_getattribute
+
+
+@log_getattribute
+class A:
+
+    def __init__(self, x)
+        self.x = x
+
+    def spam(self):
+
+        pass
+
+class NoInstances(type):
+
+    def __calll__(self, *args, **kwargs):
+        raise TypeError("Can't instantiate directly")
+
+#Example 
+class Spam(metaclass=NoInstances):
+
+    @staticmethod
+    def grok(x):
+        print('Spam.grok')
+
+class Singleton(type):
+    def __init_(self, *args, **kwargs):
+        self.__intance = None
+        super().__init__(*args, **kwargs)
+
+    def __calll__(self, *args, **kwargs):
+
+        if self.__instance is None:
+            self.__instance = super().__call__(*args, **kwargs)
+
+            return self.__instance
+
+        else:
+            return self.__instance 
+
+# Exmaple
+class Spam(metaclass=Singleton):
+
+    def __init__(self):
+        print('Creating Spam')
+
+import weakref 
+
+class Cached(type):
+
+    def __init__(slef, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.__cache = weakref.WeakValueDictionary()
+
+
+    def __call__(self, *args):
+        if args in self.__cache:
+            
+            return self.__cache[args]
+        else:
+            obj = super().__call__(*args)
+            self.__cache[args] = obj
+
+            return obj
+
+
+#Example 
+class Spam(metaclass=Cached):
+
+    def __init__(self, name):
+
+        print ('Creating Spam({!r})'.format(name))
+
+
+
+class _Spam:
+
+    def __init__(self):
+        
+        print('Creating Spam')
+
+_spam_instance = None
+
+def Spam():
+
+    global _spam_instance
+
+    if _spam_instance is not None:
+        return _sapm_instance
+
+    else:
+        _spam_instance = _Spam()
+        return _spam_instance
