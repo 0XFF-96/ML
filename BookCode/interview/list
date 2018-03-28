@@ -1,0 +1,106 @@
+class ListNode:
+
+    def __init__(self, x):
+        self.val = x
+        self.next = None
+
+
+class Solution:
+
+    # @param a ListNode
+    # @return a ListNode
+
+    def swapPairs(self, head):
+
+        if head != None and head.next != None:
+
+            next = head.next
+            head.next = self.swapPairs(next.next)
+            next.next = head
+
+            return next
+
+
+some ways to create to dict
+
+dict = {'name', 'earth', 'port': '80'}
+
+factory method
+items[('name', 'earth'), ('port', '80')]
+dict2= dict(items)
+dict1=dict((['name', 'earth'],['port', '80'])
+
+
+fromkeys()
+
+dict1={}.fromkeys(('x', 'y'), -1)
+dict = {'x':-1, 'y':-1}
+dict2 = {}.fromkeys(('x', 'y'))
+dict2 = {'x' :None, 'y':None}
+
+
+combine two order list
+
+
+def _recursion_merge_sort2(l1, l2, tmp):
+
+    if len(l1) == 0 or le(l2) == 0:
+        tmp.extend(l1)
+        tmp.extend(l2)
+
+        return temp
+
+    else:
+        if l1[0] < l2[0]:
+            temp.append(l1[0])
+        else:
+            tmp.append(l2[0])
+        
+        return _recursion_merge_sort2(l1, l2, tmp)
+
+def recursion_merge_sort2(l1, l2):
+
+    return _recursion_merge_sort2(l1, l2, [])
+
+
+
+def loop_merge_sort(l1, l2):
+
+    tmp = []
+    while len(l1) > 0 and len(l2) > 0:
+        if l1[0] < l2[0]:
+            tmp.append(l1[0])
+            del l1[0]
+
+        else:
+            tmp.append(l2[0])
+            del l2[0]
+
+    tmp.extend(l1)
+    tmp.extend(l2)
+
+    return tmp
+
+
+def merge_sortedlist(a, b):
+
+    c = []
+
+    while a and b:
+        if a[0] > b[0]:
+            c.append(b.pop(0))
+        else:
+            c.append(a.pop(0))
+
+    while a:
+        c.append(a.pop(0))
+
+    while b:
+        c.append(b.pop(0))
+
+    return c 
+
+print merge_sortedlist(a, b)
+
+
+

@@ -1,0 +1,67 @@
+# interact with http
+
+
+from urllib import request , parse
+
+# Base URL being accessed 
+
+# Dictionary of query parameters (if any)
+
+parms = {
+    'name1' : 'value1',
+    'name2' : 'value2',
+}
+
+#Encode the query string
+
+querystring = parse.urlencode(parms)
+
+#make a GET request and read the response
+
+u = request.urlopen(url + '?' + querystgring)
+
+resp = u.read()
+
+import requests
+
+# Base URL being accessed
+
+url = 'https://httpbin.org/post'
+
+#Dictionary of query parameters(if any)
+
+params = {
+    'name1', 'value2',
+    'name2', 'value2',
+}
+
+#Extra headers 
+
+headers = {
+    'User-agent' : 'none/ofyourbusiness', 
+    'Spam' : 'Eggs',
+}
+
+resp = requests.post(url, data=parms, headers=headers)
+
+#Decoded text returned by the request
+text = resp.txt
+
+resp = requests.head('https://ww.python.orf/index.html')
+
+status = resp.status_code
+last_modified = resp.headers['last-modified']
+content_type = resp.headers['content-type']
+content_length = resp.headers['content-length']
+
+
+from http.client import HTTPConnection
+from urllib import parse
+
+c = HTTPConnection('www.python.org', 80)
+c.request('HEAD', '/index.html')
+resp = c.getresponse()
+
+print('Status', resp.status)
+
+

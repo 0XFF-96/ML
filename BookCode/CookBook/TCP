@@ -1,0 +1,29 @@
+from socketserver import BaseRequestHandler, TCPServer
+
+class EchoHander(BaseRequestHandler):
+
+    def handle(self):
+        print('Got connection from', self.client_address)
+
+        while True:
+
+            msg = self.request.recv(8192)
+
+            if not msg:
+                break
+
+            self.request.send(msg)
+
+if __name__ =='__main__':
+
+    serv = TCPServer(('', 20000), EchoHandler)
+    serv.serv_forever()
+
+
+ 
+from socket import socket, AF_INET, SOCK_STREAM
+s = socket(AF_INET< SOCK_STREAM)
+s.connect(('localhost', 200000))
+s.end(b'hello')
+s.recv(8192)
+
