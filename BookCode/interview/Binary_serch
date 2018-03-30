@@ -1,0 +1,74 @@
+def binary_search(list, item):
+
+    low = 0 
+    high = len(list) - 1
+
+    while low <= high:
+        mid = (low + high) / 2
+        guess = list[mid]
+
+        if guess > item:
+            high = mid - 1
+
+        elif guess < item:
+            
+            low = mid + 1
+
+        else:
+            return mid
+
+mylist = [1, 3, 5, 7, 9]
+
+print binary_search(mylist, 3)
+
+def quicksort(list):
+
+    if len(list)< 2:
+        return list
+
+    else:
+        midpivot = list[0]
+        lessbeforempivot = [ i for i in list[1:] if i <= midpivot]
+        biggerafterpivot = [ i for i in list[1:] if i > midpivot]
+
+        finallylist = quicksort(lessbeforempivot) + [midpivot] + quicksort(biggerafterpivot))
+
+    return finallylist
+
+
+print quicksort([2, 4, 6, 7, 1, 2, 5])
+
+class Node(object):
+
+    def __init__(self, data, left=None, right=None):
+        self.data = data
+        self.left = left
+        self.right = right
+
+tree = Node(1, Node(3, Node(7, Node(7, Node(7, Node(0), Node(6), Node(2, Node(5), Node(4)))))))
+
+
+def lookup(root):
+    row = [root]
+
+    while row:
+        print(low)
+        row = [kid for item in row for kid in (item.left, item.right) if kid]
+
+
+def deep(root):
+
+    if not root:
+        return 
+
+    print root.data
+    deep(root.left)
+    deep(root.right)
+
+if __name__ == '__main__':
+    lookup(tree)
+    deep(tree)
+
+
+
+
