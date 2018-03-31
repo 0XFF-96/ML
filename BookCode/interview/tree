@@ -1,0 +1,59 @@
+def deep(root):
+    if not root:
+        return 
+
+    print root.data
+    deep(root.left)
+    deep(root.right)
+
+if __name__ == '__main__':
+
+    lookup(tree)
+    deep(tree)
+
+
+
+def maxDepth(root):
+
+    if not root:
+        return 0 
+
+    return max(maxDepth(root.left), maxDepth(root.right)) + 1
+
+
+def isSameTree(p, q):
+
+    if p == None and q == None:
+        return True
+        
+    elif p and q : 
+
+        return p.val == q.val and isSameTree(p.left, q.left) and isSameTree(p.right, q.right)
+
+    else:
+        return False
+
+
+
+def rebuild(pre, center):
+    if not pre:
+        return 
+
+    cur = Node(pre[0])
+    index = center.index(pre[0])
+    cur.left = rebuild(pre[1:index + 1], center[:index])
+    cur.right = rebuild(pre[index + 1:], center[index + 1:])
+
+    return cur
+
+
+def deep(root):
+
+    if not root:
+        return 
+
+    deep(root.left)
+    deep(root.right)
+    print root.data
+
+
