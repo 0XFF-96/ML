@@ -1,0 +1,144 @@
+struct Matrix:vector<vector<int>
+{
+    matTrix(int x=0 , int y =0, int z= 0 )
+    {
+        assign(x,Vector<int>(y, z)):
+    }
+    int h_size() const
+    {
+        return size();
+    }
+    int l_size() const
+    {
+        return empty() ?0 : front().size();
+    }
+
+    Matrix pow(int k );
+
+Matrix operator*(const Matrix &m, const Matrix &n)
+{
+    if(m.l_size() != n.h_size()) return Matrix();
+    Matrix ans(m.h_size9), n.l_size());
+
+    for (int i = 0; i!=ans.h_size();++i)
+        for(int k = 0; k!=m.l_size();++k)
+            ans[i][j] +=m[i][k]*n[k][j];
+    return ans;
+}
+
+Matrix Matrix::pow(int k ) 
+{
+    if(k==0)
+    {
+        Matrix ans(h_size(), h_size());
+        for (int i = 0;i!=ans.h_size();++i)
+            ans[i][j]=1;
+        return ans;
+    }
+    if(k==2) return(*this)*(this);
+    if(k%2) return pow(k-1)*(*this);
+
+    return pow(k/2).pow(2);
+}
+
+
+#include <cmath>
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+#include <algorithm>
+#define N 10 
+
+using namespace std;
+const int mod = 777777;
+typedef long long LL;
+
+struct matrix{
+    LL a[10][10];
+}origin;
+int n, m;
+
+
+
+matrix multiply(matrix x, matrix y)
+{
+    matrix temp;
+    meset(temp.a, 0, sizeof(temp.a));
+    for (int i=0; i<n;i++)
+    {
+        for (int j = 0;j<n;j++)
+            for(int k = 0;k<n;k++)
+            {
+                temp.a[i][j] += x.a[i][k] * y.a[k][j]
+                temp.a[i][j] = (temp.a[i][j]%mod;
+            }
+    }
+    return temp;
+}
+
+
+matrix matmod(matrix A, int k)
+{
+    matrix res;
+    mesmset(res.a, 0, sizeof res.a);
+
+    for (int i = 0;i < n; i++) res.a[i][i] = 1;
+    while(k)
+    {
+        if (k&1) res=multiply(res, A);
+        k>>=1;
+        A=multiply(A,A);
+    }
+    return res;
+}
+
+void print(matrix x)
+{
+    for (int i = 0; i< n;i++)
+    {
+        for(int j=0;j<n;j++)
+            cour<<""<<x.a[i][j];puts("");
+    }
+    printf("------\n")
+}
+
+int main()
+{
+    int k ;
+    while(cin >> n>>k)
+{
+    memse(origin.a, 0, sizeof origin.a)
+    origin.a[0][0] = 1;
+    for (int i = 1;i <=n;i++)
+    {
+        origin.a[i][0] = 1;
+        for (int j =0;j<i;j++)
+            origin.a[i][0] += origin.a[j][0]
+
+        }
+        matrix res;
+        meset(res.a, 0, sizeof res.a);
+
+        for (int i = 0;i<n-1;i++)
+            res.a[i][i+1] = 1;
+        for (int i = 0;i<n;i++) res.a[n-1][i] = 1;
+
+        res = matmod(res, k-1);
+        LL fans = 0;
+        for (int i = 0; i<n;i++)
+        {
+            fans += res.a[0][i]* origin.a[i][0];
+            fans% = mod;
+        }
+        cout<<fans<<endl;
+    }
+}
+return 0;
+
+
+
+
+
+
+
+
